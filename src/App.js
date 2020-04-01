@@ -1,26 +1,34 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Header } from './components/Header';
+import { Action } from './components/Action';
+import { Balance } from './components/Balance';
+import Transactions from './components/Transactions';
+import AddTransaction from './components/AddTransaction';
+import './styles/main.scss';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+export default class App extends React.Component {
+  state = {
+    title: 'Expense Tracker',
+    openModal: false
+  };
+  handleOpenModal = () => {
+    this.setState(() => ({ openModal: true }));
+  };
+  handleCloseModal = () => {
+    this.setState(() => ({ openModal: false }));
+  };
+  render() {
+    return (
+      <div>
+        <Header title={this.state.title}></Header>
+        <Action handleOpenModal={this.handleOpenModal}></Action>
+        <Balance></Balance>
+        <Transactions></Transactions>
+        <AddTransaction
+          openModal={this.state.openModal}
+          handleCloseModal={this.handleCloseModal}></AddTransaction>
+      </div >
+    );
+  }
+};
 
-export default App;

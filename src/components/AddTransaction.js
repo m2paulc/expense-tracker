@@ -34,7 +34,7 @@ export default class AddTransaction extends React.Component {
           onSubmitForm={this.handleFormSubmit}
           className="add-transaction">
           <div>
-            <label for="transaction-date">Date: </label>
+            <label htmlFor="transaction-date">Date: </label>
             <input type="date"
               name="transaction-date"
               className="add-transaction__date"
@@ -43,20 +43,20 @@ export default class AddTransaction extends React.Component {
               required></input>
           </div>
           <div>
-            <label for="transaction-name">Name: </label>
+            <label htmlFor="transaction-name">Name: </label>
             <input type="text"
               name="transaction-name"
               className="add-transaction__name" required></input>
           </div>
           <div>
             <h4>Type</h4>
-            <label for="transaction-credit">Credit Card: </label>
+            <label htmlFor="transaction-credit">Credit Card: </label>
             <input type="text" name="transaction-credit" className="add-transaction__credit"></input>
             <input type="checkbox" name="transaction-cash" className="add-transaction__cash"></input>
-            <label for="transaction-cash">Cash</label>
+            <label htmlFor="transaction-cash">Cash</label>
           </div>
           <div>
-            <label for="transaction-amount">Amount: </label>
+            <label htmlFor="transaction-amount">Amount: </label>
             <input type="number"
               name="transaction-amount"
               className="add-transaction__amount" required></input>

@@ -29,7 +29,8 @@ export default class App extends React.Component {
     obj['name'] = name;
     obj['type'] = type;
     obj['amount'] = amount;
-    this.state.transactionDetails.push(obj);
+    let updatedState = [...this.state.transactionDetails, obj];
+    this.setState({ transactionDetails: updatedState });
   };
   // componentDidMount() {
   //   try {

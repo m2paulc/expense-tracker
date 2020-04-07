@@ -32,17 +32,17 @@ export default class App extends React.Component {
     let updatedState = [...this.state.transactionDetails, obj];
     this.setState({ transactionDetails: updatedState });
   };
-  // componentDidMount() {
-  //   try {
-  //     const json = localStorage.getItem('transactionDetails');
-  //     const transactions = JSON.parse(json);
-  //     if (transactions) {
-  //       this.setState(() => ({ transactions }));
-  //     }
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // };
+  componentDidMount() {
+    try {
+      const json = localStorage.getItem('transactionDetails');
+      const transactions = JSON.parse(json);
+      if (transactions) {
+        this.setState(() => ({ transactionDetails: transactions }));
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
   componentDidUpdate(prevProps, prevState) {
     try {
       if (prevState.transactionDetails.length !== this.state.transactionDetails.length) {

@@ -1,0 +1,8 @@
+.grid {
+	width: 100%;
+	display: grid;
+	grid-template-columns: repeat(5, auto);
+	padding: 0.5rem 0 0.5rem 0.5rem;
+	background-color: $light-blue;
+	color: $primary-color;
+}

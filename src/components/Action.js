@@ -2,8 +2,8 @@ import React from 'react';
 
 export const Action = (props) => {
   return (
-    <div>
-      <button onClick={props.handleOpenModal}>Add New Expense</button>
-    </div>
+    <div className="wrapper">
+      <button onClick={props.handleOpenModal} className="button">Add New Expense</button>
+    </div >
   );
 };

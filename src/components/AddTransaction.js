@@ -8,7 +8,12 @@ export default class AddTransaction extends React.Component {
   };
   handleFormSubmit = (e) => {
     e.preventDefault();
-    let newTransaction = e.target.elements.transaction.value.trim();
+    let dateTransaction = e.target.elements.transactionDate.value;
+    let nameTransaction = e.target.elements.transactionName.value.trim();
+    let typeTransaction = (!e.target.elements.transactionCash.value) ? 'Credit' : 'Cash';
+    let amountTransaction = parseFloat(e.target.elements.transactionAmount.value);
+    const error = this.props.handleAddTransaction(dateTransaction, nameTransaction, typeTransaction, amountTransaction);
+    this.setState(() => ({ error }));
   };
   handleMaxDate = () => {
     let todaysDate = new Date();
@@ -28,37 +33,39 @@ export default class AddTransaction extends React.Component {
         isOpen={this.props.openModal}
         contentLabel='Add Transaction'
       >
-        {this.state.error && <h4>{this.state.error}</h4>}
-        <button onClick={this.props.handleCloseModal} className="exit-button">X</button>
+        <div className="exit-container">
+          <button onClick={this.props.handleCloseModal} className="exit-button">X</button>
+        </div>
+        {this.state.error && <h4 className="add-error">{this.state.error}</h4>}
         <form
-          onSubmitForm={this.handleFormSubmit}
+          onSubmit={this.handleFormSubmit}
           className="add-transaction">
           <div>
-            <label htmlFor="transaction-date">Date: </label>
+            <label htmlFor="transactionDate">Date: </label>
             <input type="date"
-              name="transaction-date"
+              name="transactionDate"
               className="add-transaction__date"
               min='2018-01-01'
               max={this.handleMaxDate()}
               required></input>
           </div>
           <div>
-            <label htmlFor="transaction-name">Name: </label>
+            <label htmlFor="transactionName">Name: </label>
             <input type="text"
-              name="transaction-name"
+              name="transactionName"
               className="add-transaction__name" required></input>
           </div>
           <div>
             <h4>Type</h4>
-            <label htmlFor="transaction-credit">Credit Card: </label>
-            <input type="text" name="transaction-credit" className="add-transaction__credit"></input>
-            <input type="checkbox" name="transaction-cash" className="add-transaction__cash"></input>
-            <label htmlFor="transaction-cash">Cash</label>
+            <label htmlFor="transactionCredit">Credit Card: </label>
+            <input type="text" name="transactionCredit" className="add-transaction__credit"></input>
+            <input type="checkbox" name="transactionCash" className="add-transaction__cash"></input>
+            <label htmlFor="transactionCash">Cash</label>
           </div>
           <div>
-            <label htmlFor="transaction-amount">Amount: </label>
+            <label htmlFor="transactionAmount">Amount: </label>
             <input type="number"
-              name="transaction-amount"
+              name="transactionAmount"
               className="add-transaction__amount" required></input>
           </div>
           <button className="button">Add</button>

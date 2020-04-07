@@ -23,19 +23,49 @@ export default class App extends React.Component {
   handleCloseModal = () => {
     this.setState(() => ({ openModal: false }));
   };
-  handleShowTransactions = () => {
-
+  handleAddTransaction = (date, name, type, amount) => {
+    let obj = {};
+    obj['date'] = date;
+    obj['name'] = name;
+    obj['type'] = type;
+    obj['amount'] = amount;
+    this.state.transactionDetails.push(obj);
   };
+  // componentDidMount() {
+  //   try {
+  //     const json = localStorage.getItem('transactionDetails');
+  //     const transactions = JSON.parse(json);
+  //     if (transactions) {
+  //       this.setState(() => ({ transactions }));
+  //     }
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
+  componentDidUpdate(prevProps, prevState) {
+    try {
+      if (prevState.transactionDetails.length !== this.state.transactionDetails.length) {
+        const json = JSON.stringify(this.state.transactionDetails);
+        localStorage.setItem('transactionDetails', json);
+        console.log(localStorage);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
   render() {
     return (
       <div>
         <Header title={this.state.title}></Header>
-        <Action handleOpenModal={this.handleOpenModal}></Action>
-        <Balance></Balance>
-        <Transactions transactionDetails={this.state.transactionDetails}></Transactions>
+        <div className="container">
+          <Action handleOpenModal={this.handleOpenModal}></Action>
+          <Balance></Balance>
+          <Transactions transactionDetails={this.state.transactionDetails}></Transactions>
+        </div>
         <AddTransaction
           openModal={this.state.openModal}
-          handleCloseModal={this.handleCloseModal}></AddTransaction>
+          handleCloseModal={this.handleCloseModal}
+          handleAddTransaction={this.handleAddTransaction}></AddTransaction>
       </div >
     );
   }

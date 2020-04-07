@@ -1,5 +1,4 @@
 import React from 'react';
-
 export default class Transactions extends React.Component {
   handleShowTransactions() {
     return this.props.transactionDetails.map((transaction, idx) => (

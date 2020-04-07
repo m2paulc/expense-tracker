@@ -2,11 +2,15 @@ import React from 'react';
 
 export const Balance = () => {
   return (
-    <div>
-      <h3>Your Balance</h3>
-      <p>$0.00</p>
-      <h3>Total Expenses</h3>
-      <p>$0.00</p>
+    <div className="inner-container">
+      <div>
+        <h4>Your Balance</h4>
+        <p className="totals">$0.00</p>
+      </div>
+      <div>
+        <h4>Total Expenses</h4>
+        <p className="totals">$0.00</p>
+      </div>
     </div>
   );
 };

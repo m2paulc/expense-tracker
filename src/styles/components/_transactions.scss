@@ -6,3 +6,13 @@
 	background-color: $light-blue;
 	color: $primary-color;
 }
+
+.transaction-header {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	padding: 0.5rem 0.25rem;
+	text-transform: uppercase;
+	font-weight: 700;
+	background-color: $soft-purple;
+}

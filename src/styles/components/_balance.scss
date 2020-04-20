@@ -3,4 +3,24 @@
 	font-weight: bold;
 	text-align: center;
 	margin: 0.5rem 0;
+	font-weight: bold;
+}
+
+.balance {
+	color: green;
+}
+
+.expenses {
+	color: orangered;
+}
+
+@media (min-width: 720px) {
+	.totals {
+		margin-bottom: 1.5rem;
+	}
+
+	h4 {
+		font-size: 1.5rem;
+		font-weight: bold;
+	}
 }

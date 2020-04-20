@@ -10,12 +10,9 @@ export default class App extends React.Component {
   state = {
     title: 'Expense Tracker',
     openModal: false,
-    remainingBalance: 0,
+    remainingBalance: 1000,
     totalExpenses: 0,
-    transactionDetails: [
-      { 'date': '03/20/2020', 'name': 'grocery', 'type': 'credit', 'amount': 25.00 },
-      { 'date': '03/25/2020', 'name': 'pharmacy', 'type': 'cash', 'amount': 10.00 }
-    ]
+    transactionDetails: []
   };
   handleOpenModal = () => {
     this.setState(() => ({ openModal: true }));
@@ -23,14 +20,28 @@ export default class App extends React.Component {
   handleCloseModal = () => {
     this.setState(() => ({ openModal: false }));
   };
+  handleFormatDate = (date) => {
+    let splitDate = date.split('-');
+    return `${splitDate[1]}/${splitDate[2]}/${splitDate[0]}`;
+  };
   handleAddTransaction = (date, name, type, amount) => {
     let obj = {};
-    obj['date'] = date;
+    obj['date'] = this.handleFormatDate(date);
     obj['name'] = name;
     obj['type'] = type;
     obj['amount'] = amount;
     let updatedState = [...this.state.transactionDetails, obj];
     this.setState({ transactionDetails: updatedState });
+  };
+  handleTotalExpenses = () => {
+    let currState = [...this.state.transactionDetails];
+    const total = currState.reduce((accumulator, transaction) => {
+      return accumulator + parseFloat(transaction.amount);
+    }, 0);
+    return total;
+  };
+  handleRemainingBalance = () => {
+    return this.state.remainingBalance - this.handleTotalExpenses();
   };
   componentDidMount() {
     try {
@@ -48,7 +59,8 @@ export default class App extends React.Component {
       if (prevState.transactionDetails.length !== this.state.transactionDetails.length) {
         const json = JSON.stringify(this.state.transactionDetails);
         localStorage.setItem('transactionDetails', json);
-        console.log(localStorage);
+        // console.log(localStorage);
+        this.setState({ totalExpenses: this.handleTotalExpenses() });
       }
     } catch (err) {
       console.error(err);
@@ -60,7 +72,8 @@ export default class App extends React.Component {
         <Header title={this.state.title}></Header>
         <div className="container">
           <Action handleOpenModal={this.handleOpenModal}></Action>
-          <Balance></Balance>
+          <Balance handleTotalExpenses={this.handleTotalExpenses}
+            handleRemainingBalance={this.handleRemainingBalance}></Balance>
           <Transactions transactionDetails={this.state.transactionDetails}></Transactions>
         </div>
         <AddTransaction

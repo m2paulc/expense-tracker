@@ -36,7 +36,12 @@ export default class AddTransaction extends React.Component {
         <div className="exit-container">
           <button onClick={this.props.handleCloseModal} className="exit-button">X</button>
         </div>
-        {this.state.error && <h4 className="add-error">{this.state.error}</h4>}
+        <div className="add-transaction__title">
+          <h2>Add an Expense</h2>
+        </div>
+        <div>
+          {this.state.error && <h4 className="add-error">{this.state.error}</h4>}
+        </div>
         <form
           onSubmit={this.handleFormSubmit}
           className="add-transaction">
@@ -59,8 +64,10 @@ export default class AddTransaction extends React.Component {
             <h4>Type</h4>
             <label htmlFor="transactionCredit">Credit Card: </label>
             <input type="text" name="transactionCredit" className="add-transaction__credit"></input>
-            <input type="checkbox" name="transactionCash" className="add-transaction__cash"></input>
-            <label htmlFor="transactionCash">Cash</label>
+            <div className="">
+              <input type="checkbox" name="transactionCash" className="add-transaction__cash"></input>
+              <label htmlFor="transactionCash">Cash</label>
+            </div>
           </div>
           <div>
             <label htmlFor="transactionAmount">Amount: </label>

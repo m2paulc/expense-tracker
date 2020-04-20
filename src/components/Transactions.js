@@ -13,7 +13,16 @@ export default class Transactions extends React.Component {
   }
   render() {
     return (
-      <>{this.handleShowTransactions()}</>
+      <>
+        <div className="transaction-header">
+          <p>id</p>
+          <p>date</p>
+          <p>name</p>
+          <p>type</p>
+          <p>amount</p>
+        </div>
+        {this.handleShowTransactions()}
+      </>
     );
   }
 };

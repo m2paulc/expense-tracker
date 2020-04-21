@@ -43,6 +43,11 @@ export default class App extends React.Component {
   handleRemainingBalance = () => {
     return this.state.remainingBalance - this.handleTotalExpenses();
   };
+  handleDeleteTransaction = (name) => {
+    console.log(name);
+    const data = this.state.transactionDetails.filter((transaction) => name !== transaction.name);
+    console.log(data);
+  };
   componentDidMount() {
     try {
       const json = localStorage.getItem('transactionDetails');
@@ -74,7 +79,8 @@ export default class App extends React.Component {
           <Action handleOpenModal={this.handleOpenModal}></Action>
           <Balance handleTotalExpenses={this.handleTotalExpenses}
             handleRemainingBalance={this.handleRemainingBalance}></Balance>
-          <Transactions transactionDetails={this.state.transactionDetails}></Transactions>
+          <Transactions transactionDetails={this.state.transactionDetails}
+            handleDeleteTransaction={this.handleDeleteTransaction}></Transactions>
         </div>
         <AddTransaction
           openModal={this.state.openModal}

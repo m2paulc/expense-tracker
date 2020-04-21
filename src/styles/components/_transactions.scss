@@ -26,6 +26,10 @@
 	& svg {
 		fill: $blu;
 	}
+	& button {
+		background: none;
+		border: none;
+	}
 }
 
 .delete-icon {
@@ -37,6 +41,10 @@
 	transition: opacity 0.3s ease-in, transform 0.3s ease-in;
 	& svg {
 		fill: orangered;
+	}
+	& button {
+		background: none;
+		border: none;
 	}
 }
 

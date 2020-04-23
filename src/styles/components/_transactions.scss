@@ -2,6 +2,13 @@
 	display: flex;
 	flex-wrap: wrap;
 	position: relative;
+	transition: all 0.3s ease;
+}
+
+.fall {
+	transform-origin: bottom left;
+	transform: translateY(4rem) rotateZ(20deg);
+	opacity: 0;
 }
 
 .transaction-container:hover,

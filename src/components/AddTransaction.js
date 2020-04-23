@@ -4,16 +4,20 @@ import ReactModal from 'react-modal';
 ReactModal.setAppElement('#root');
 export default class AddTransaction extends React.Component {
   state = {
-    error: undefined
+    error: undefined,
+    payment: 'Credit Card'
   };
+  handlePaymentMethod = (event) => this.setState({ payment: event.target.value });
+
   handleFormSubmit = (e) => {
     e.preventDefault();
     let dateTransaction = e.target.elements.transactionDate.value;
     let nameTransaction = e.target.elements.transactionName.value.trim();
-    let typeTransaction = (!e.target.elements.transactionCash.value) ? 'Credit' : 'Cash';
+    let typeTransaction = this.state.payment;
     let amountTransaction = parseFloat(e.target.elements.transactionAmount.value);
     const error = this.props.handleAddTransaction(dateTransaction, nameTransaction, typeTransaction, amountTransaction);
     this.setState(() => ({ error }));
+    this.props.handleCloseModal();
   };
   handleMaxDate = () => {
     let todaysDate = new Date();
@@ -32,7 +36,8 @@ export default class AddTransaction extends React.Component {
       <ReactModal
         isOpen={this.props.openModal}
         contentLabel='Add Transaction'
-      >
+        closeTimeoutMS={200}
+        className="modal">
         <div className="exit-container">
           <button onClick={this.props.handleCloseModal} className="exit-button">X</button>
         </div>
@@ -45,31 +50,28 @@ export default class AddTransaction extends React.Component {
         <form
           onSubmit={this.handleFormSubmit}
           className="add-transaction">
-          <div>
+          <div className="add-transaction__date">
             <label htmlFor="transactionDate">Date: </label>
             <input type="date"
               name="transactionDate"
-              className="add-transaction__date"
               min='2018-01-01'
               max={this.handleMaxDate()}
               required></input>
           </div>
-          <div>
-            <label htmlFor="transactionName">Name: </label>
+          <div className="transaction-name">
+            <label htmlFor="transactionName">Description: </label>
             <input type="text"
               name="transactionName"
               className="add-transaction__name" required></input>
           </div>
-          <div>
-            <h4>Type</h4>
-            <label htmlFor="transactionCredit">Credit Card: </label>
-            <input type="text" name="transactionCredit" className="add-transaction__credit"></input>
-            <div className="">
-              <input type="checkbox" name="transactionCash" className="add-transaction__cash"></input>
-              <label htmlFor="transactionCash">Cash</label>
-            </div>
-          </div>
-          <div>
+          <label className="payment-method">Payment Method:
+             <select name="paymentMethod" value={this.state.payment} onChange={this.handlePaymentMethod}>
+              <option value="Credit Card">Credit Card</option>
+              <option value="Paypal">Paypal</option>
+              <option value="Cash">Cash</option>
+            </select>
+          </label>
+          <div className="amount">
             <label htmlFor="transactionAmount">Amount: </label>
             <input type="number"
               name="transactionAmount"

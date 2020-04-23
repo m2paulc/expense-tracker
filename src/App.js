@@ -26,12 +26,13 @@ export default class App extends React.Component {
   };
   handleAddTransaction = (date, name, type, amount) => {
     let obj = {};
+    obj['id'] = Math.floor(Date.now() / 1000);
     obj['date'] = this.handleFormatDate(date);
     obj['name'] = name;
     obj['type'] = type;
     obj['amount'] = amount;
-    let updatedState = [...this.state.transactionDetails, obj];
-    this.setState({ transactionDetails: updatedState });
+    let updateTransactionDetails = [...this.state.transactionDetails, obj];
+    this.setState({ transactionDetails: updateTransactionDetails });
   };
   handleTotalExpenses = () => {
     let currState = [...this.state.transactionDetails];
@@ -43,10 +44,12 @@ export default class App extends React.Component {
   handleRemainingBalance = () => {
     return this.state.remainingBalance - this.handleTotalExpenses();
   };
-  handleDeleteTransaction = (name) => {
-    console.log(name);
-    const data = this.state.transactionDetails.filter((transaction) => name !== transaction.name);
-    console.log(data);
+  handleDeleteTransaction = (id) => {
+    setTimeout(() => {
+      const updateTransactionDetails = this.state.transactionDetails.filter((transaction, index) => id !== transaction.id);
+      this.setState({ transactionDetails: updateTransactionDetails });
+    }, 600);
+
   };
   componentDidMount() {
     try {

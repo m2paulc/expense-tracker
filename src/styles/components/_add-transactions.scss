@@ -1,3 +1,29 @@
+.ReactModalPortal > div {
+	opacity: 0;
+}
+
+.ReactModalPortal .ReactModal__Overlay {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	transition: opacity 0.2s ease-in-out;
+
+	&--after-open {
+		opacity: 1;
+	}
+
+	&--before-close {
+		opacity: 0;
+	}
+}
+
+.modal {
+	max-width: 96vw;
+	background-color: $primary-color;
+	color: $dark-blue;
+}
+
 .exit-container {
 	width: 100%;
 	display: flex;
@@ -27,18 +53,28 @@
 }
 
 label {
-	font-size: 1.1em;
+	font-size: 1.25rem;
 }
-input {
-	font-size: 1.25em;
+input[type="date"],
+select {
+	font-size: 1.25rem;
+}
+
+select {
+	margin-left: 5px;
+}
+
+label[for="transactionName"] {
+	margin-left: 28px;
 }
 
 input[type="text"],
 input[type="number"] {
-	height: 18px;
+	height: 24px;
 	border: 0;
-	width: calc(100% - 2px);
-	// margin-left: 1px;
+	width: calc(100% - 18px);
+	font-size: 1.25rem;
+	background-color: rgba(250, 250, 250, 0.8);
 	box-shadow: -8px 10px 0px -7px #ebebeb, 8px 10px 0px -7px #ebebeb;
 	-webkit-transition: box-shadow 0.3s;
 	transition: box-shadow 0.3s;
@@ -49,6 +85,14 @@ input[type="number"]:focus {
 	box-shadow: -8px 10px 0px -7px #4ea6ea, 8px 10px 0px -7px #4ea6ea;
 }
 
+.transaction-name {
+	margin: 1rem;
+}
+
+.payment-method {
+	margin: 1rem auto;
+}
+
 .add-transaction {
 	display: flex;
 	flex-direction: column;
@@ -56,19 +100,38 @@ input[type="number"]:focus {
 
 	&__title {
 		text-align: center;
-		padding: 1rem;
-	}
-
-	& div {
-		margin: 0.25em 0;
-		padding: 0.5rem;
+		margin-bottom: 1rem;
+		padding: 0 1rem 1rem 1rem;
 	}
 
 	& label {
 		font-weight: bold;
+		color: $dark-blue;
 	}
 
-	&__cash {
-		margin-top: 0.5rem;
+	&__date {
+		margin: 1rem auto;
+		padding-left: 2rem;
+
+		& input {
+			width: 40vw;
+		}
 	}
+
+	&__name {
+		margin: 0.5rem;
+	}
+
+	&__amount {
+		// display: inline-block;
+		margin-left: 0.5rem;
+		padding: 0 0.2em;
+	}
+}
+
+.amount {
+	width: 64vw;
+	display: flex;
+	justify-content: center;
+	margin: 1rem auto;
 }

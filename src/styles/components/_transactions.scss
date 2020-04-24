@@ -5,9 +5,17 @@
 	transition: all 0.3s ease;
 }
 
-.fall {
+.fall-exit {
 	transform-origin: bottom left;
+	opacity: 1;
+}
+
+.fall-exit-active {
 	transform: translateY(4rem) rotateZ(20deg);
+	opacity: 0.4;
+}
+
+.fall-exit-done {
 	opacity: 0;
 }
 
